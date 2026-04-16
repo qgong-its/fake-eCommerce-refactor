@@ -1,6 +1,6 @@
 import { formatPrice } from '@/utils/currency';
 
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, onAddToCart }) => {
   return (
     <article className="card bg-base-100 w-96 shadow-sm">
       <figure>
@@ -13,7 +13,7 @@ const ProductCard = ({ product }) => {
           <span className="font-bold">{formatPrice(product.price)}</span>
           <button
             className="btn btn-primary"
-            onClick={() => console.log('add', product.id)}
+            onClick={() => onAddToCart(product) }
           >
             Add to Cart
           </button>

@@ -3,6 +3,7 @@ import { Link } from 'react-router';
 
 import { getAllProducts, getCategories } from '@/services/fakeStoreApi';
 import ProductCard from '@/components/ui/ProductCard';
+import { useCart } from '@/context/CartContext';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
@@ -26,6 +27,8 @@ const HomePage = () => {
     loadHomePageData();
   }, []);
 
+  const { addToCart } = useCart();
+
   return (
     <section className="space-y-4">
       <div className="flex flex-wrap gap-2 mb-6">
@@ -42,7 +45,11 @@ const HomePage = () => {
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard
+            key={product.id}
+            product={product}
+            onAddToCart={addToCart}
+          />
         ))}
       </div>
     </section>
