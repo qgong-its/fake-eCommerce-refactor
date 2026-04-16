@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router';
 
 import { getAllProducts, getCategories } from '@/services/fakeStoreApi';
 import ProductCard from '@/components/ui/ProductCard';
@@ -22,15 +23,20 @@ const HomePage = () => {
     };
 
     loadHomePageData();
+    loadHomePageData();
   }, []);
 
   return (
     <section className="space-y-4">
       <div className="flex flex-wrap gap-2 mb-6">
         {categories.map((category) => (
-          <button key={category} className="btn btn-sm">
+          <Link
+            key={category}
+            to={`/category/${encodeURIComponent(category)}`}
+            className="btn btn-sm"
+          >
             {category}
-          </button>
+          </Link>
         ))}
       </div>
 
