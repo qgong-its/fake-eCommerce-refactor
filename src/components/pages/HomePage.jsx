@@ -1,28 +1,38 @@
 import { useEffect, useState } from 'react';
 
-import { getAllProducts } from '@/services/fakeStoreApi';
+import { getAllProducts, getCategories } from '@/services/fakeStoreApi';
 import ProductCard from '@/components/ui/ProductCard';
 
 const HomePage = () => {
   const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
-    const loadProducts = async () => {
+    const loadHomePageData = async () => {
       try {
-        const products = await getAllProducts();
+        const [products, categories] = await Promise.all([
+          getAllProducts(),
+          getCategories(),
+        ]);
         setProducts(products);
-        console.log('products:', products);
+        setCategories(categories);
       } catch (error) {
         console.error(error);
       }
     };
 
-    loadProducts();
+    loadHomePageData();
   }, []);
 
   return (
     <section className="space-y-4">
-      <h1 className="text-3xl font-bold mb-4">Products</h1>
+      <div className="flex flex-wrap gap-2 mb-6">
+        {categories.map((category) => (
+          <button key={category} className="btn btn-sm">
+            {category}
+          </button>
+        ))}
+      </div>
 
       <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
