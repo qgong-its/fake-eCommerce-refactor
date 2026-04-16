@@ -11,3 +11,11 @@ export const request = async (endpoint) => {
 export const getAllProducts = () => {
   return request('/products');
 };
+
+export const getCategories = () => {
+  return request('/products/categories');
+};
+
+export const getProductsByCategory = (category) => {
+  return request(`/products/category/${category}`);
+};
