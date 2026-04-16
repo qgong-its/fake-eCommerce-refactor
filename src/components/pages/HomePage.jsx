@@ -23,6 +23,7 @@ const HomePage = () => {
     };
 
     loadHomePageData();
+    loadHomePageData();
   }, []);
 
   return (
