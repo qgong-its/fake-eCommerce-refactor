@@ -1,4 +1,4 @@
-const Home = () => {
+const HomePage = () => {
   return (
     <section className="space-y-4">
       <h1 className="text-3xl font-bold">Home</h1>
@@ -9,7 +9,7 @@ const Home = () => {
   );
 };
 
-export default Home; // import MainLayout from ...
+export default HomePage; // import MainLayout from ...
 
 /**
  * export Home;

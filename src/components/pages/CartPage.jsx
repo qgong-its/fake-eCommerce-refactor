@@ -1,4 +1,4 @@
-const Home = () => {
+const CartPage = () => {
   return (
     <section className="space-y-4">
       <h1 className="text-3xl font-bold">Cart</h1>
@@ -9,4 +9,4 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default CartPage;
