@@ -15,7 +15,12 @@ const ProductCard = ({ product }) => {
         <span className="text-xs text-gray-500">{product.category}</span>
         <div className="card-actions justify-end">
           <span className="font-bold">{formatPrice(product.price)}</span>
-          <button className="btn btn-primary">Add to Cart</button>
+          <button
+            className="btn btn-primary"
+            onClick={() => console.log('add', product.id)}
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </article>
