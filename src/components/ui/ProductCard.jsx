@@ -1,8 +1,4 @@
-const formatPrice = (price) =>
-  new Intl.NumberFormat('de-DE', {
-    style: 'currency',
-    currency: 'EUR',
-  }).format(price);
+import { formatPrice } from '@/utils/currency';
 
 const ProductCard = ({ product }) => {
   return (
