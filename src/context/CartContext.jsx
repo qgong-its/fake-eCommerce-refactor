@@ -4,8 +4,8 @@ import { formatPrice } from '@/utils/currency';
 
 const initialState = {
   items: [],
-  total: formatPrice(0),
   itemCount: 0,
+  total: formatPrice(0),
 };
 
 const cartReducer = (state, action) => {
@@ -88,6 +88,8 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     items: state.items,
+    itemCount: state.itemCount,
+    total: state.total,
     addToCart,
     removeFromCart,
     emptyCart,
