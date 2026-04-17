@@ -1,9 +1,10 @@
-import { createContext, use, useReducer } from 'react';
+import { createContext, use, useEffect, useReducer } from 'react';
 
 import { formatPrice } from '@/utils/currency';
+import { getCartFromStorage, saveCartToStorage } from '@/utils/storage';
 
 const initialState = {
-  items: [],
+  items: getCartFromStorage(),
   itemCount: 0,
   total: formatPrice(0),
 };
@@ -73,6 +74,10 @@ const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
   const [state, dispatch] = useReducer(cartReducer, initialState);
+
+  useEffect(() => {
+    saveCartToStorage(state.items);
+  }, [state.items]);
 
   const addToCart = (product) => {
     dispatch({ type: 'ADD_TO_CART', payload: product });
