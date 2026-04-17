@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router';
+import { Link, useSearchParams } from 'react-router';
 
 import { getAllProducts, getCategories } from '@/services/fakeStoreApi';
 import ProductCard from '@/components/ui/ProductCard';
@@ -8,6 +8,7 @@ import { useCart } from '@/context/CartContext';
 const HomePage = () => {
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
+  const [searchParams] = useSearchParams();
 
   useEffect(() => {
     const loadHomePageData = async () => {
@@ -24,8 +25,15 @@ const HomePage = () => {
     };
 
     loadHomePageData();
-    loadHomePageData();
   }, []);
+
+  const query = searchParams.get('q')?.trim() || '';
+
+  const filteredProducts = query
+    ? products.filter((product) =>
+        product.title.toLowerCase().includes(query.toLowerCase()),
+      )
+    : products;
 
   const { addToCart } = useCart();
 
@@ -43,15 +51,21 @@ const HomePage = () => {
         ))}
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-        {products.map((product) => (
-          <ProductCard
-            key={product.id}
-            product={product}
-            onAddToCart={addToCart}
-          />
-        ))}
-      </div>
+      {query && <p className="text-sm opacity-60">Results for: "{query}"</p>}
+
+      {query && filteredProducts.length === 0 ? (
+        <p className="text-center opacity-60">No products found.</p>
+      ) : (
+        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+          {filteredProducts.map((product) => (
+            <ProductCard
+              key={product.id}
+              product={product}
+              onAddToCart={addToCart}
+            />
+          ))}
+        </div>
+      )}
     </section>
   );
 };
