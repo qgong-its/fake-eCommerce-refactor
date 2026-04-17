@@ -1,5 +1,7 @@
 import { Link, NavLink } from 'react-router';
 
+import SearchBar from './SearchBar';
+
 const Navbar = () => {
   return (
     <header className="navbar bg-base-100 shadow-md">
@@ -9,6 +11,7 @@ const Navbar = () => {
         </Link>
 
         <nav className="flex items-center gap-2">
+          <SearchBar />
           <NavLink
             to="/"
             end
